@@ -20,23 +20,24 @@ class ContactController extends AbstractController
         // creates a task object and initializes some data for this example
         $contact = new Contact();
         $contact->setMessage('');
-        $contact->setMailMessage('');
-        $contact->setUsernameMessage('');
+        $contact->setMail('');
+        $contact->setUsername('');
 
 
 
         $form = $this->createFormBuilder($contact)
             ->add('message', TextType::class)
-            ->add('mailMessage', EmailType::class)
-            ->add('usernameMessage', TextType::class)
+            ->add('mail', EmailType::class)
+            ->add('username', TextType::class)
             ->add('save', SubmitType::class, ['label' => 'Envoyer Message'])
             ->getForm();
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $contactManger = $doctrine->getManager();
-            $contactManger->persist($contact);
-            $contactManger->flush();
+            $contactManager = $doctrine->getManager();
+            $contactManager->persist($contact);
+            $contactManager->flush();
+            return $this->redirectToRoute('app_home_page');
         }
 
 

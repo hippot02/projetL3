@@ -39,26 +39,26 @@ class Contact
         return $this;
     }
 
-    public function getMailMessage(): ?string
+    public function getMail(): ?string
     {
         return $this->mail;
     }
 
-    public function setMailMessage(string $mailMessage): self
+    public function setMail(string $mail): self
     {
-        $this->mail = $mailMessage;
+        $this->mail = $mail;
 
         return $this;
     }
 
-    public function getUsernameMessage(): ?string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function setUsernameMessage(string $usernameMessage): self
+    public function setUsername(string $username): self
     {
-        $this->username = $usernameMessage;
+        $this->username = $username;
 
         return $this;
     }
