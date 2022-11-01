@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Upload;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -48,5 +49,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_home_page');
         yield MenuItem::linkToCrud('User', 'fas fa-list', User::class);
+        yield MenuItem::linkToCrud('Upload', 'fas fa-list', Upload::class);
+
     }
 }

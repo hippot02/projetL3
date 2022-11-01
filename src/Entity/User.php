@@ -29,6 +29,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\ManytoMany(targetEntity:"Upload", inversedBy: "User")]
+    private ?Upload $upload ;
     public function getId(): ?int
     {
         return $this->id;
