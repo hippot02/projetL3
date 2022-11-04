@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -29,8 +31,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManytoMany(targetEntity:"Upload", inversedBy: "User")]
+    #[ORM\ManytoOne(targetEntity:"Upload", inversedBy: "User")]
     private ?Upload $upload ;
+
+    #[ORM\ManyToOne(targetEntity:"Contact", inversedBy: "User")]
+    private ?Contact $contact ;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles(): array
+    public function getRoles():array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
@@ -76,6 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
 
     /**
      * @see PasswordAuthenticatedUserInterface
@@ -100,4 +107,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
 }

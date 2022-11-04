@@ -30,7 +30,9 @@ class Upload
 
 
 
+
      #[ORM\OnetoOne(targetEntity:"User", inversedBy: "Upload")]
+
     private ?User $user ;
 
     public function getId(): ?int

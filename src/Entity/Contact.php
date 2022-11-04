@@ -17,16 +17,19 @@ class Contact
     private ?int $idContact = null;
 
     #[ORM\Column]
-    private ?int $message_id = null;
+    private ?int $Userid = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Mail = null;
+    private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
+
+    #[ORM\OneToOne(targetEntity:"User", inversedBy: "Contact")]
+    private ?User $user ;
 
     public function getId(): ?int
     {
@@ -45,14 +48,14 @@ class Contact
         return $this;
     }
 
-    public function getMessageId(): ?int
+    public function getUserid(): ?int
     {
-        return $this->message_id;
+        return $this->Userid;
     }
 
-    public function setMessageId(int $message_id): self
+    public function setUserid(int $Userid): self
     {
-        $this->message_id = $message_id;
+        $this->Userid = $Userid;
 
         return $this;
     }
@@ -62,7 +65,7 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
 
@@ -71,12 +74,12 @@ class Contact
 
     public function getMail(): ?string
     {
-        return $this->Mail;
+        return $this->mail;
     }
 
-    public function setMail(string $Mail): self
+    public function setMail(string $mail): self
     {
-        $this->Mail = $Mail;
+        $this->mail = $mail;
 
         return $this;
     }
