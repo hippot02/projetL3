@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManytoOne(targetEntity:"Upload", inversedBy: "User")]
+    #[ORM\ManyToOne(targetEntity:"Upload", inversedBy: "User")]
     private ?Upload $upload ;
 
     #[ORM\ManyToOne(targetEntity:"Contact", inversedBy: "User")]
@@ -73,6 +73,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
+
         return array_unique($roles);
     }
 
@@ -106,6 +107,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getUpload(): ?Upload
+    {
+        return $this->upload;
+    }
+
+    public function setUpload(?Upload $upload): self
+    {
+        $this->upload = $upload;
+
+        return $this;
+    }
+
+    public function getContact(): ?Contact
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?Contact $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
     }
 
 }
