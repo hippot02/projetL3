@@ -33,6 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Upload::class)]
     private Collection $uploads;
 
@@ -44,6 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->uploads = new ArrayCollection();
         $this->contacts = new ArrayCollection();
     }
+
 
 
     public function getId(): ?int
@@ -76,7 +78,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles():array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
