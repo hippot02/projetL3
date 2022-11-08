@@ -32,6 +32,13 @@ class Upload
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+
+
+
+     #[ORM\ManyToMany(targetEntity:"User")]
+
+    private ?User $user ;
+
     public function getId(): ?int
     {
         return $this->id;

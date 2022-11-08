@@ -2,7 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Upload;
+
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UploadCrudController extends AbstractCrudController
@@ -12,8 +15,9 @@ class UploadCrudController extends AbstractCrudController
         return Upload::class;
     }
 
-    /*
-    public function configureFields(string $pageName): iterable
+
+
+   /* public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id'),
@@ -22,4 +26,11 @@ class UploadCrudController extends AbstractCrudController
         ];
     }
     */
+*/
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->remove(Crud::PAGE_INDEX, Action::NEW);
+    }
+
 }

@@ -12,8 +12,17 @@ class Contact
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
     #[ORM\Column(length: 255)]
+
+    #[ORM\Column]
+    private ?int $idContact = null;
+
+    #[ORM\Column]
+    private ?int $Userid = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
@@ -21,10 +30,37 @@ class Contact
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
+    #[ORM\ManyToMany(targetEntity:"User", inversedBy: "Contact")]
+    private ?User $user ;
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+
+    public function getIdContact(): ?int
+    {
+        return $this->idContact;
+    }
+
+    public function setIdContact(int $idContact): self
+    {
+        $this->idContact = $idContact;
+
+        return $this;
+    }
+
+    public function getUserid(): ?int
+    {
+        return $this->Userid;
+    }
+
+    public function setUserid(int $Userid): self
+    {
+        $this->Userid = $Userid;
+
+        return $this;
     }
 
     public function getMessage(): ?string
@@ -32,7 +68,8 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(string $message): self
+
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
 
@@ -62,4 +99,17 @@ class Contact
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
 }

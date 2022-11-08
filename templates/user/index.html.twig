@@ -1,0 +1,37 @@
+{% extends 'userProfil.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <div href="#profil" class="grix xs4 container">
+        <div class="col-xs1"> Mon email : </div>
+        <div class="col-xs3">{{app.user.email}}</div>
+        <div class="col-xs1">Mot de passe : </div>
+        <div class="col-xs3">{{app.user.password}}</div>
+        <div class="col-xs1">Roles : </div>
+        <div class="col-xs3">
+            {% for role in app.user.roles %}
+            {{role}}
+            {% endfor %}
+        </div>
+        <div class = "col-xs4">
+            <a href="#" class = "btn blue"> Modifier le profil </a>
+            <a href="#" class = "btn blue"> Modifier le mot de passe </a>
+        </div>
+    </div>
+
+    <div href="#coins" class="grix xs1 container">
+        <div class="col-xs1"> coin </div>
+    </div>
+
+
+    <div href="#upload" class="grix xs4 container">
+
+    </div>
+
+
+    <div href="#contact" class="grix xs4 container">
+
+    </div>
+
+{% endblock %}
