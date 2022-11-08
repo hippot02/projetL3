@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
 class Upload
@@ -27,7 +26,10 @@ class Upload
     private ?string $description = null;
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     #[ORM\ManyToOne(inversedBy: 'uploads')]
     private ?User $User = null;
 
