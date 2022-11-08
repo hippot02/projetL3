@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -31,11 +33,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(targetEntity: "Upload", inversedBy: "User")]
-    private ?Upload $upload;
 
-    #[ORM\ManyToOne(targetEntity: "Contact", inversedBy: "User")]
-    private ?Contact $contact;
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Upload::class)]
+    private Collection $uploads;
+
+    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Contact::class)]
+    private Collection $contacts;
+
+    public function __construct()
+    {
+        $this->uploads = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -132,4 +143,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Upload>
+     */
+    public function getUploads(): Collection
+    {
+        return $this->uploads;
+    }
+
+    public function addUpload(Upload $upload): self
+    {
+        if (!$this->uploads->contains($upload)) {
+            $this->uploads->add($upload);
+            $upload->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUpload(Upload $upload): self
+    {
+        if ($this->uploads->removeElement($upload)) {
+            // set the owning side to null (unless already changed)
+            if ($upload->getUser() === $this) {
+                $upload->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contact>
+     */
+    public function getContacts(): Collection
+    {
+        return $this->contacts;
+    }
+
+    public function addContact(Contact $contact): self
+    {
+        if (!$this->contacts->contains($contact)) {
+            $this->contacts->add($contact);
+            $contact->setContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContact(Contact $contact): self
+    {
+        if ($this->contacts->removeElement($contact)) {
+            // set the owning side to null (unless already changed)
+            if ($contact->getContact() === $this) {
+                $contact->setContact(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -14,9 +14,6 @@ class Upload
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $userId = null;
-
     #[ORM\Column(length: 255)]
     private ?string $files = null;
 
@@ -31,26 +28,14 @@ class Upload
 
 
 
-
-    #[ORM\ManyToMany(targetEntity: "User")]
-    private ?User $user;
+    #[ORM\ManyToOne(inversedBy: 'uploads')]
+    private ?User $User = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->userId;
-    }
-
-    public function setUserId(int $userId): self
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
 
     public function getFiles(): ?string
     {
@@ -96,6 +81,18 @@ class Upload
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): self
+    {
+        $this->User = $User;
 
         return $this;
     }
