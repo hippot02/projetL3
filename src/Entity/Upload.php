@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
 class Upload
@@ -24,6 +25,7 @@ class Upload
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
+
 
 
     #[ORM\ManyToOne(inversedBy: 'uploads')]

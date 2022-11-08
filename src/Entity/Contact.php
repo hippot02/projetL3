@@ -25,6 +25,7 @@ class Contact
     #[ORM\ManyToOne(inversedBy: 'contacts')]
     private ?User $contact = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
