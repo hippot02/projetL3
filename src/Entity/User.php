@@ -31,11 +31,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToOne(targetEntity:"Upload", inversedBy: "User")]
-    private ?Upload $upload ;
+    #[ORM\ManyToOne(targetEntity: "Upload", inversedBy: "User")]
+    private ?Upload $upload;
 
-    #[ORM\ManyToOne(targetEntity:"Contact", inversedBy: "User")]
-    private ?Contact $contact ;
+    #[ORM\ManyToOne(targetEntity: "Contact", inversedBy: "User")]
+    private ?Contact $contact;
 
     public function getId(): ?int
     {
@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getRoles():array
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
@@ -132,5 +132,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 }

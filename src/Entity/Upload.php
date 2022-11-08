@@ -4,10 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\String\Slugger\SluggerInterface;
-
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
 class Upload
@@ -35,9 +32,8 @@ class Upload
 
 
 
-     #[ORM\ManyToMany(targetEntity:"User")]
-
-    private ?User $user ;
+    #[ORM\ManyToMany(targetEntity: "User")]
+    private ?User $user;
 
     public function getId(): ?int
     {
