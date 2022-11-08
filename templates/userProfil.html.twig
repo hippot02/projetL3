@@ -26,16 +26,16 @@
 		<div class="sidenav-header">
 
 		</div>
-		<a href="#profil" class="sidenav-link active">Mon Profil</a>
-		<a href="#coins" class="sidenav-link">Mes Coins</a>
-		<a href="#upload" class="sidenav-link">Mes Upload</a>
-		<a href="#contact" class="sidenav-link">Mes Contact</a>
+		<a href="{{path('app_user')}}" class="sidenav-link active">Mon Profil</a>
+		<a href="{{path('app_user_coin')}}" class="sidenav-link">Mes Coins</a>
+		<a href="{{path('app_user_upload')}}" class="sidenav-link">Mes Upload</a>
+		<a href="{{path('app_user_contact')}}"class="sidenav-link">Mes Contact</a>
 	</div>
 
 <main>
 	<button data-target="example-sidenav"
 			class="btn rounded-1 press amaranth dark-1 hide-md-up">
-		 PLUS
+		≡
 	</button>
 </main>
 	{% block body %}{% endblock %}
