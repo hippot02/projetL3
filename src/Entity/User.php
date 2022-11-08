@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Contact::class)]
     private Collection $contacts;
 
+    #[ORM\Column]
+    private ?int $Coins = null;
+
     public function __construct()
     {
         $this->uploads = new ArrayCollection();
@@ -120,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUpload(): ?Upload
     {
-        return $this->upload;
+        return $this->upload  ;
     }
 
     public function setUpload(?Upload $upload): self
@@ -132,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getContact(): ?Contact
     {
-        return $this->contact;
+        return $this->contact ;
     }
 
     public function setContact(?Contact $contact): self
@@ -147,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUploads(): Collection
     {
-        return $this->uploads;
+        return $this->uploads  ;
     }
 
     public function addUpload(Upload $upload): self
@@ -198,6 +201,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $contact->setContact(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCoins(): ?int
+    {
+        return $this->Coins;
+    }
+
+    public function setCoins(int $Coins): self
+    {
+        $this->Coins = $Coins;
 
         return $this;
     }

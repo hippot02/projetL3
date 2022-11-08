@@ -8,14 +8,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditProfilUserType extends AbstractType
+class EditCoinAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            /*->add('upload')
-            ->add('contact')*/
+            ->add('Coins')
             ->add('Valider', SubmitType::class)
         ;
     }
