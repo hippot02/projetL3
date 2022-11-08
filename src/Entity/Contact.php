@@ -28,7 +28,7 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
-    #[ORM\OneToOne(targetEntity:"User", inversedBy: "Contact")]
+    #[ORM\ManyToMany(targetEntity:"User", inversedBy: "Contact")]
     private ?User $user ;
 
     public function getId(): ?int

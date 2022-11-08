@@ -31,7 +31,7 @@ class Upload
 
 
 
-     #[ORM\OnetoOne(targetEntity:"User", inversedBy: "Upload")]
+     #[ORM\ManyToMany(targetEntity:"User")]
 
     private ?User $user ;
 
