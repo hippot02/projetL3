@@ -26,10 +26,6 @@ class Upload
     private ?string $description = null;
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     #[ORM\ManyToOne(inversedBy: 'uploads')]
     private ?User $User = null;
 

@@ -1,16 +1,12 @@
 {% extends 'userProfil.html.twig' %}
 
-{% block title %}Modification du profil{% endblock %}
+{% block title %}Modification du profil
+{% endblock %}
 
 {% block body %}
-    <div class = "grix xs4 container" >
-        <div class="col-xs4">
-            <h1>Modification du profil</h1>
 
-            {{ form(form) }}
-        </div>
-
-
-    </div>
-
-{% endblock %}
+	<h1>Modification du profil</h1>
+	<div>
+		{{ form(form) }}
+		</div>
+	{% endblock %}

@@ -33,7 +33,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-<<<<<<< Updated upstream
+
 
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Upload::class)]
     private Collection $uploads;
@@ -48,23 +48,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-=======
-    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Upload::class)]
-    private Collection $uploads;
-
-    #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Contact::class)]
-    private Collection $contacts;
-
-    #[ORM\Column]
-    private ?int $Coins = null;
-
-    public function __construct()
-    {
-        $this->uploads = new ArrayCollection();
-        $this->contacts = new ArrayCollection();
-    }
-
->>>>>>> Stashed changes
 
     public function getId(): ?int
     {
@@ -140,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUpload(): ?Upload
     {
-        return $this->upload;
+        return $this->upload = null;
     }
 
     public function setUpload(?Upload $upload): self
@@ -222,8 +205,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-<<<<<<< Updated upstream
-=======
     public function getCoins(): ?int
     {
         return $this->Coins;
@@ -235,5 +216,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
->>>>>>> Stashed changes
 }
