@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
 class Upload

@@ -12,6 +12,8 @@ class Contact
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    
+    #[ORM\Column(length: 255)]
 
     #[ORM\Column]
     private ?int $idContact = null;
@@ -20,6 +22,7 @@ class Contact
     private ?int $Userid = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
@@ -27,7 +30,6 @@ class Contact
 
     #[ORM\Column(length: 255)]
     private ?string $username = null;
-
     #[ORM\ManyToMany(targetEntity:"User", inversedBy: "Contact")]
     private ?User $user ;
 
@@ -35,6 +37,7 @@ class Contact
     {
         return $this->id;
     }
+
 
     public function getIdContact(): ?int
     {
@@ -64,6 +67,7 @@ class Contact
     {
         return $this->message;
     }
+
 
     public function setMessage(?string $message): self
     {
@@ -107,4 +111,5 @@ class Contact
 
         return $this;
     }
+
 }
