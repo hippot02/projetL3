@@ -34,12 +34,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
 
-
     #[ORM\OneToMany(mappedBy: 'User', targetEntity: Upload::class)]
     private Collection $uploads;
 
     #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Contact::class)]
     private Collection $contacts;
+
+    #[ORM\Column]
+    private ?int $Coins = null;
 
     public function __construct()
     {
@@ -123,7 +125,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUpload(): ?Upload
     {
-        return $this->upload = null;
+        return $this->upload;
     }
 
     public function setUpload(?Upload $upload): self

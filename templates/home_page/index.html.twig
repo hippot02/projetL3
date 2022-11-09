@@ -5,35 +5,44 @@
 
 {% block body %}
 	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
+		body,
+		html {
+			height: 100%;
 		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
+
+		.bg {
+			/* The image used */
+			background-image: url("https://mdbootstrap.com/img/Photos/Others/img%20(42).webp");
+			/* Full height */
+			height: 100%;
+			/* Center and scale the image nicely */
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
 		}
 	</style>
-
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
-
-		This friendly message is coming from:
-		<ul>
-			<li>Your controller at
-				<code>
-					<a href="{{ 'C:/Users/Hippolyte/Desktop/ProjetL3/projet/src/Controller/HomePageController.php'|file_link(0) }}">src/Controller/HomePageController.php</a>
-				</code>
-			</li>
-			<li>Your template at
-				<code>
-					<a href="{{ 'C:/Users/Hippolyte/Desktop/ProjetL3/projet/templates/home_page/index.html.twig'|file_link(0) }}">templates/home_page/index.html.twig</a>
-				</code>
-			</li>
-		</ul>
+	<div class="bg">
+		<div class="view jarallax" data-jarallax='{"speed": 0.2}'>
+			<div class=" full-bg-img mask rgba-black-light">
+				<div class="container flex-center">
+					<div class="row pt-5 mt-3 w-100">
+						<div class="col-md-12">
+							<div class="text-center">
+								<h2 class="h1 h1-reponsive white-text font-up font-bold mb-3 wow fadeInDown" data-wow-delay="0.3s">
+									<strong>FileUp</strong>
+								</h2>
+								<hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
+								<h5 class="font-up mb-5 white-text wow fadeInDown" data-wow-delay="0.4s">
+									<strong>Upload and Share</strong>
+								</h5>
+								<h7>Inscrivez vous dès maintenant pour Uploader et partager tous vos fichiers</h7><br><br>
+								<a href="{{path('app_login')}}" class="btn btn-outline-primary">Login</a>
+								<a href="{{path('app_register')}}" class=" btn btn-outline-primary">Register</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
 {% endblock %}

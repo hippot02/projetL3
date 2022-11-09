@@ -17,12 +17,21 @@
 		}
 	</style>
 
-	<div class="h1">
+	<div class="example-wrapper">
 		<h1>
 			Vos Coins ! ✅</h1>
 		<h2>
-			infini
+			{% for role in app.user.roles %}
+				{% if role == "ROLE_USER" or role =="ROLE_PRIME" and role != "ROLE_ADMIN" %}
+					{{app.user.coins}}
+				{% elseif role == "ROLE_ADMIN"%}
+					<a href="{{path('app_user_coin_modif')}}" class="btn blue">
+						Modifier les Coins
+					</a>
+				{% endif %}
+			{% endfor %}
 		</h2>
-	</div>
 
+
+	</div>
 {% endblock %}

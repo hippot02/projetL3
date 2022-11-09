@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+
+
 		<nav class="navbar navbar-expand-sm navbar-light bg-lightgray">
 			<a class="navbar-brand" href="#">FileUp</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +18,9 @@
 					<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
 					<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
 					<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
+					{% if is_granted('ROLE_ADMIN') %}
+						<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
+					{% endif %}
 				</div>
 			</div>
 		</nav>
@@ -29,4 +34,4 @@
 	<body>
 		{% block body %}{% endblock %}
 	</body>
-</html>
+</html></head></html></head></html>
