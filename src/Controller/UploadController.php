@@ -19,6 +19,9 @@ class UploadController extends AbstractController
     #[Route('/upload', name: 'app_upload')]
     public function index(): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         return $this->render('upload/index.html.twig', [
             'controller_name' => 'UploadController',
         ]);

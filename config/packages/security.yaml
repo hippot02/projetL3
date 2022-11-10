@@ -35,6 +35,7 @@ security:
          - { path: ^/user, roles: ROLE_USER }
 
     role_hierarchy :
+            ROLE_BLOCKED : ROLE_USER 
             ROLE_PRIME : ROLE_USER
             ROLE_ADMIN : ROLE_PRIME
 

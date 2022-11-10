@@ -17,6 +17,9 @@ class UserCoinController extends AbstractController
     #[Route('/user/coin', name: 'app_user_coin')]
     public function index(): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         return $this->render('user_coin/index.html.twig', [
             'controller_name' => 'UserCoinController',
         ]);
@@ -24,6 +27,9 @@ class UserCoinController extends AbstractController
     #[Route('/user/coin/modifier', name: 'app_user_coin_modif')]
     public function addCoin(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
 
         $user = $this->getUser();
         $form = $this->createForm(EditCoinAdminType::class, $user);

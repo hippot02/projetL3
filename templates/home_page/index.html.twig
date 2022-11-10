@@ -19,6 +19,7 @@
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
+
 		}
 	</style>
 	<div class="bg">
@@ -33,11 +34,30 @@
 								</h2>
 								<hr class="hr-light mt-4 wow fadeInDown" data-wow-delay="0.4s">
 								<h5 class="font-up mb-5 white-text wow fadeInDown" data-wow-delay="0.4s">
-									<strong>Upload and Share</strong>
+									{% if is_granted('ROLE_BLOCKED') %}
+										<strong>Vous êtes bloqué.e !</strong>
+									{% else %}
+										<strong>Upload and Share</strong>
+									{% endif %}
 								</h5>
-								<h7>Inscrivez vous dès maintenant pour Uploader et partager tous vos fichiers</h7><br><br>
-								<a href="{{path('app_login')}}" class="btn btn-outline-primary">Login</a>
-								<a href="{{path('app_register')}}" class=" btn btn-outline-primary">Register</a>
+								{% if is_granted('ROLE_BLOCKED') %}
+									<h7>Vous avez été bloqué suite à un non-respect de nos règles d'utilisation pour une durée inderterminer.</h7>
+									<h7>
+										Contactez les administrateurs pour d'autres renseignements ou demandes.</h7><br><br>
+									<a href="{{path('app_contact')}}" class="btn btn-outline-primary">Contact</a>
+									<a class="btn btn-outline-primary" href="{{ path('app_logout') }}">Se déconnecter</a>
+
+								{% else %}
+									{% if app.user %}
+
+										<h7>Commencez à Upload dès maintenant !</h7><br><br>
+										<a href="{{path('app_upload')}}" class="btn btn-outline-primary">Upload</a>
+									{% else %}
+										<h7>Inscrivez vous ou connectz vous dès maintenant pour Uploader et partager tous vos fichiers</h7><br><br>
+										<a href="{{path('app_login')}}" class="btn btn-outline-primary">Login</a>
+										<a href="{{path('app_register')}}" class=" btn btn-outline-primary">Register</a>
+									{% endif %}
+								{% endif %}
 							</div>
 						</div>
 					</div>

@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $contacts;
 
     #[ORM\Column]
-    private ?int $Coins = null;
+    private ?int $Coins = 0;
 
     public function __construct()
     {

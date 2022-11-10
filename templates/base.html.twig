@@ -11,15 +11,25 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home
-					</a>
-					<a class="nav-item nav-link" href="{{path('app_login')}}">Login</a>
-					<a class="nav-item nav-link" href="{{path('app_register')}}">Register</a>
-					<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
-					<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
-					<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
-					{% if is_granted('ROLE_ADMIN') %}
-						<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
+					{% if is_granted('ROLE_BLOCKED') %}
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home
+						</a>
+						<a class="nav-item nav-link disabled" href="{{path('app_login')}}">Login</a>
+						<a class="nav-item nav-link disabled" href="{{path('app_register')}}">Register</a>
+						<a class="nav-item nav-link disabled" href="{{path('app_upload')}}">Upload</a>
+						<a class="nav-item nav-link " href="{{path('app_contact')}}">Contact</a>
+						<a class="nav-item nav-link disabled" href="{{path('app_user')}}">Profil</a>
+					{% else %}
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home
+						</a>
+						<a class="nav-item nav-link" href="{{path('app_login')}}">Login</a>
+						<a class="nav-item nav-link" href="{{path('app_register')}}">Register</a>
+						<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
+						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
+						<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
+						{% endif %}
 					{% endif %}
 				</div>
 			</div>
@@ -34,4 +44,4 @@
 	<body>
 		{% block body %}{% endblock %}
 	</body>
-</html></head></html></head></html>
+</html></head></html></head></html></head></html>
