@@ -53,7 +53,6 @@ class UserController extends AbstractController
         $form = $this->createForm(EditMdpUserType::class, $user);
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setPassword(
@@ -65,11 +64,20 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Profil mis à jour !');
-            return $this->redirectToRoute('app_user');
+            return $this->render('user/editMdp.html.twig', ['form'
+            => $form->createView()]);
         }
+    }
 
-        return $this->render('user/editMdp.html.twig', ['form'
-        => $form->createView()]);
+    #[Route('/usertoprime', name: 'app_upgrade_to_prime')]
+    public function upgradeRole(EntityManagerInterface $entityManage): Response
+    {
+        $user = $this->getUser();
+        if ($user->this . getCoins() > 10) {
+            $user->this . setRoles('ROLE_PRIME');
+            $entityManager->persist($user);
+            $entityManager->flush();
+        }
+        return $this->render('user/index.html.twig');
     }
 }
