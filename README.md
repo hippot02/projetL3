@@ -3,6 +3,8 @@
 
 Procédure d'installation
 
+Ouvrir un cmd
+
 Clonez le répertoire `git clone https://github.com/hippot02/projetL3.git`
 
 Placez vous dans le projet `cd /projetL3`
