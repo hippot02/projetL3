@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="UTF-8">
 
-
 		<nav class="navbar navbar-expand-sm navbar-light bg-lightgray">
 			<a class="navbar-brand" href="#">FileUp</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,24 +11,31 @@
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					{% if is_granted('ROLE_BLOCKED') %}
-						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home
-						</a>
-						<a class="nav-item nav-link disabled" href="{{path('app_login')}}">Login</a>
-						<a class="nav-item nav-link disabled" href="{{path('app_register')}}">Register</a>
-						<a class="nav-item nav-link disabled" href="{{path('app_upload')}}">Upload</a>
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link " href="{{path('app_contact')}}">Contact</a>
-						<a class="nav-item nav-link disabled" href="{{path('app_user')}}">Profil</a>
-					{% else %}
-						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home
-						</a>
-						<a class="nav-item nav-link" href="{{path('app_login')}}">Login</a>
-						<a class="nav-item nav-link" href="{{path('app_register')}}">Register</a>
+
+						{% elseif is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') and is_granted('ROLE_PRIME') %}
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
 						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
 						<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
-						{% if is_granted('ROLE_ADMIN') %}
-							<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
-						{% endif %}
+						<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
+						<a class="nav-item nav-link" href="{{path('app_logout')}}">Se Deconnecter</a>
+
+						{% elseif is_granted('ROLE_USER') or is_granted('ROLE_PRIME') %}
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
+						<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
+						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
+						<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
+						<a class="nav-item nav-link" href="{{path('app_logout')}}">Se Deconnecter</a>
+
+						{% else %}
+						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
+						<a class="nav-item nav-link" href="{{path('app_login')}}">Login</a>
+						<a class="nav-item nav-link" href="{{path('app_register')}}">Register</a>
+						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
+
+
 					{% endif %}
 				</div>
 			</div>

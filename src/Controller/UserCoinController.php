@@ -39,7 +39,7 @@ class UserCoinController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setCoins(
-                $form->get('coin')->getData()
+                $form->get('Coins')->getData()
             );
             $entityManager->persist($user);
             $entityManager->flush();

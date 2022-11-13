@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $contacts;
 
     #[ORM\Column]
-    private ?int $Coins = 0;
+    private ?int $Coins = 10;
 
     public function __construct()
     {
@@ -165,6 +165,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function __toString(): string
+    {
+        return $this->getEmail();
+    }
     public function removeUpload(Upload $upload): self
     {
         if ($this->uploads->removeElement($upload)) {

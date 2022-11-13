@@ -28,9 +28,15 @@
 			<div class="sidenav-header"></div>
 			<a href="{{path('app_home_page')}}" class="sidenav-link">Home</a>
 			<a href="{{path('app_user')}}" class="sidenav-link">Mon Profil</a>
-			<a href="{{path('app_user_coin')}}" class="sidenav-link">Mes Coins</a>
-			<a href="{{path('app_user_upload')}}" class="sidenav-link">Mes Upload</a>
+			<a href="{{path('app_user_coin')}}" class="sidenav-link">Mes Uploads Restant</a>
+			<a href="{{path('upload')}}" class="sidenav-link">Mes Uploads</a>
+			{%  for role in app.user.roles  %}
+			{% if role == 'ROLE_ADMIN' %}
 			<a href="{{path('app_user_contact')}}" class="sidenav-link">Mes Contact</a>
+			{% endif%}
+			{% endfor %}
+			<a href="{{path('app_logout')}}" class="sidenav-link">Se Deconnecter</a>
+
 		</div>
 
 		<main>

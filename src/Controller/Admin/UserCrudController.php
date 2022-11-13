@@ -42,10 +42,11 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnForm(),
             TextField::new('email')
                 ->setFormType(EmailType::class),
-            TextField::new('password')
+               TextField::new('password')
                 ->onlyWhenCreating()
                 ->setFormType(PasswordType::class),
             ArrayField::new('roles'),
+            IntegerField::new('coins', 'Coins'),
 
 
         ];

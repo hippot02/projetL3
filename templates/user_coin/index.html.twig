@@ -1,6 +1,6 @@
 {% extends 'userProfil.html.twig' %}
 
-{% block title %}Vos Coins
+{% block title %}Nombre d'uploads restants
 {% endblock %}
 
 {% block body %}
@@ -18,20 +18,13 @@
 	</style>
 
 	<div class="example-wrapper">
-		<h1>
-			Vos Coins ! ✅</h1>
-		<h2>
-			{% for role in app.user.roles %}
-				{% if role == "ROLE_USER" or role =="ROLE_PRIME" and role != "ROLE_ADMIN" %}
-					{{app.user.coins}}
-				{% elseif role == "ROLE_ADMIN"%}
-					<a href="{{path('app_user_coin_modif')}}" class="btn blue">
-						Modifier les Coins
-					</a>
-				{% endif %}
-			{% endfor %}
-		</h2>
+		<h1> Vous avez le droit à: </h1>
 
+				{% if "ROLE_ADMIN" in app.user.roles or "ROLE_PRIME" in app.user.roles %}
+					<h2>Aucune limite de fichiers ✅</h2>
+				{% else %}
+					<h2>{{app.user.coins}} Fichiers ✅</h2>
+				{% endif %}
 
 	</div>
 {% endblock %}
