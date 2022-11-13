@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Security;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -13,10 +14,7 @@ class Contact
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $MessageId = null;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
@@ -25,21 +23,14 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
+    #[ORM\ManyToOne(inversedBy: 'contacts')]
+    #[Assert\NotBlank]
+    private ?User $contact;
+
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getMessageId(): ?int
-    {
-        return $this->MessageId;
-    }
-
-    public function setMessageId(int $MessageId): self
-    {
-        $this->MessageId = $MessageId;
-
-        return $this;
     }
 
     public function getMessage(): ?string
@@ -47,7 +38,7 @@ class Contact
         return $this->message;
     }
 
-    public function setMessage(string $message): self
+    public function setMessage(?string $message): self
     {
         $this->message = $message;
 
@@ -77,4 +68,31 @@ class Contact
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getContact(): ?User
+    {
+        return $this->contact;
+    }
+
+    public function setContact(?User $contact): self
+    {
+        $this->contact = $contact;
+
+        return $this;
+    }
+
+
+
 }
