@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+    <h1>Download File</h1>
+    <h2>Number of download: {{ filename.countDownload }}</h2>
+    {% if filename.description == true %}
+        <h3>Description: {{ filename.description }}</h3>
+    {% endif %}
+    {% if filename.filePassword == true %}
+        <input type="password" id="filePass" placeholder="Password" />
+        <button type="button" onclick="redirectUrl()">Download</button>
+    {% else %}
+        <a href="{{ app.request.schemeAndHttpHost }}/downloadurl/{{ filename.files }}">Download File</a>
+    {% endif %}
+    <script>
+        function redirectUrl(){
+            var x = document.getElementById('filePass').value;
+            document.location.href="{{ app.request.schemeAndHttpHost }}/downloadurl/{{ filename.files }}/?password=" + x;
+        }
+    </script>
+{% endblock %}
