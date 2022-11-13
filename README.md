@@ -3,9 +3,9 @@
 
 Procédure d'installation
 
-Clonez le répertoire.
+Clonez le répertoire `git clone https://github.com/hippot02/projetL3.git`
 
-Placez vous dans le projet.
+Placez vous dans le projet `cd /projetL3`
 
 La base de données est disponible sous le nom de encore.sql dans le repertoire principal.
 
@@ -23,6 +23,9 @@ Exécutez ensuite `symfony serve`
 
 Une fois sur le site 4 comptes ont déjà été créer pour chaque rôle
 Admin : admin@admin.admin | mdp : admin37
+
 Prime : prime@prime.prime | mdp : prime37
+
 User : user@user.user | mdp : user37
+
 Blocked : blocked@blocked.blocked | mdp : blocked37
