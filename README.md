@@ -36,10 +36,8 @@ Blocked : blocked@blocked.blocked | mdp : blocked37
 
 Si besoin pour Upload des fichiers plus gros :
 
-; Maximum allowed size for uploaded files.
 upload_max_filesize = 40M
 
-; Must be greater than or equal to upload_max_filesize
 post_max_size = 40M
 
 Ces valeurs se trouvent dans le php.ini et sont a modifiées
