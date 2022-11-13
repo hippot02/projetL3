@@ -20,6 +20,9 @@ class UserController extends AbstractController
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         return $this->render('user/index.html.twig');
     }
 
@@ -28,6 +31,9 @@ class UserController extends AbstractController
     public function editProfil(Request $request, EntityManagerInterface $entityManager): Response
 
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         $user = $this->getUser();
         $form = $this->createForm(EditProfilUserType::class, $user);
 
@@ -49,6 +55,9 @@ class UserController extends AbstractController
     public function editMdp(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
 
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         $user = $this->getUser();
         $form = $this->createForm(EditMdpUserType::class, $user);
 
@@ -72,6 +81,9 @@ class UserController extends AbstractController
     #[Route('/usertoprime', name: 'app_upgrade_to_prime')]
     public function upgradeRole(EntityManagerInterface $entityManage): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         $user = $this->getUser();
         if ($user->this . getCoins() > 10) {
             $user->this . setRoles('ROLE_PRIME');

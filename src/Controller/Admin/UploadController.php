@@ -15,6 +15,9 @@ class UploadController extends AbstractDashboardController
     #[Route('/upload', name: 'upload')]
     public function index(): Response
     {
+        if ($this->isGranted("ROLE_BLOCKED")) {
+            return $this->redirectToRoute('app_home_page');
+        }
         $securityContext = $this->container->get('security.authorization_checker');
         if (!($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED'))) {
             return $this->redirectToRoute('app_login');
@@ -32,9 +35,8 @@ class UploadController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'app_home_page');
         yield MenuItem::linkToCrud('Upload', 'fas fa-file-upload', Upload::class);
         yield MenuItem::linkToRoute('Profile', 'fas fa-user', 'app_user');
     }
-
-
 }
