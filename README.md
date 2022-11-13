@@ -42,4 +42,4 @@ upload_max_filesize = 40M
 ; Must be greater than or equal to upload_max_filesize
 post_max_size = 40M
 
-Ces valeurs se trouvent dans le php.in et sont a modifiées
+Ces valeurs se trouvent dans le php.ini et sont a modifiées
