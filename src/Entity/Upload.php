@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UploadRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security;
 
 #[ORM\Entity(repositoryClass: UploadRepository::class)]
 class Upload
@@ -27,7 +29,15 @@ class Upload
 
 
     #[ORM\ManyToOne(inversedBy: 'uploads')]
-    private ?User $User = null;
+    #[Assert\NotNull]
+    private ?User $User = null ;
+
+    public function __construct()
+    {
+        $this-> countDownload = 0 ;
+
+
+    }
 
     public function getId(): ?int
     {

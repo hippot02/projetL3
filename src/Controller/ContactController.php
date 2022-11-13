@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Contact;
+use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +26,6 @@ class ContactController extends AbstractController
         $contact->setUsername('');
 
 
-
         $form = $this->createFormBuilder($contact)
             ->add('message', TextType::class)
             ->add('mail', EmailType::class)
@@ -35,7 +36,10 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $contactManager = $doctrine->getManager();
+            $user = $this->getUser() ;
+            $user->addContact($contact);
             $contactManager->persist($contact);
+
             $contactManager->flush();
             return $this->redirectToRoute('app_home_page');
         }
@@ -49,6 +53,8 @@ class ContactController extends AbstractController
     // #[Route('/contact', name: 'app_contact')]
     public function index(): Response
     {
+
+
         return $this->render('contact/index.html.twig', [
             'controller_name' => 'ContactController',
         ]);

@@ -13,8 +13,15 @@ class EditCoinAdminType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+<<<<<<< HEAD
             ->add('Coins')
             ->add('Valider', SubmitType::class);
+=======
+
+            ->add('Coins')
+            ->add('Valider', SubmitType::class)
+        ;
+>>>>>>> merge1
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -12,7 +12,7 @@
 
 		.bg {
 			/* The image used */
-			background-image: url("https://mdbootstrap.com/img/Photos/Others/img%20(42).webp");
+			background-image: url('https://mdbootstrap.com/img/Photos/Others/img%20(42).webp');
 			/* Full height */
 			height: 100%;
 			/* Center and scale the image nicely */
@@ -52,8 +52,9 @@
 
 										<h7>Commencez à Upload dès maintenant !</h7><br><br>
 										<a href="{{path('app_upload')}}" class="btn btn-outline-primary">Upload</a>
+
 									{% else %}
-										<h7>Inscrivez vous ou connectz vous dès maintenant pour Uploader et partager tous vos fichiers</h7><br><br>
+										<h7>Inscrivez vous ou connectez vous dès maintenant pour Uploader et partager tous vos fichiers</h7><br><br>
 										<a href="{{path('app_login')}}" class="btn btn-outline-primary">Login</a>
 										<a href="{{path('app_register')}}" class=" btn btn-outline-primary">Register</a>
 									{% endif %}

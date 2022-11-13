@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Security;
 
 #[ORM\Entity(repositoryClass: ContactRepository::class)]
 class Contact
@@ -23,7 +24,8 @@ class Contact
     private ?string $username = null;
 
     #[ORM\ManyToOne(inversedBy: 'contacts')]
-    private ?User $contact = null;
+    #[Assert\NotBlank]
+    private ?User $contact;
 
 
     public function getId(): ?int
@@ -90,4 +92,7 @@ class Contact
 
         return $this;
     }
+
+
+
 }
