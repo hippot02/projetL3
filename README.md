@@ -22,6 +22,7 @@ Importez la bdd sur phpmyadmin.
 Exécutez ensuite `symfony serve`
 
 Une fois sur le site 4 comptes ont déjà été créer pour chaque rôle
+
 Admin : admin@admin.admin | mdp : admin37
 
 Prime : prime@prime.prime | mdp : prime37
