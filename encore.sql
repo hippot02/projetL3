@@ -41,7 +41,7 @@ CREATE TABLE `accueil` (
 
 INSERT INTO `accueil` (`id`, `logo`, `text_on_home`, `active`, `title`) VALUES
 (4, '096a35453660aa9b83ba4ab6d9182d61-429939d4-19e5-4134-8255-4ffd3a3fb9c5.jpg', 'Ceci est le texte modifié', 0, 'Uploading your files'),
-(5, 'abstract-simple-background-4k-lp-1920x1080-aa80bfba-f082-4330-8ddf-d03bd743b817.jpg', 'Autre modif', 1, 'Google Drive');
+(5, 'abstract-simple-background-4k-lp-1920x1080-aa80bfba-f082-4330-8ddf-d03bd743b817.jpg', 'Autre modif', 0, 'Google Drive');
 
 -- --------------------------------------------------------
 
