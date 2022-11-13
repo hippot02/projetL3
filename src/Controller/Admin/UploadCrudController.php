@@ -37,15 +37,16 @@ class UploadCrudController extends AbstractCrudController
     }
 
     #[Route('/downloadurl/{filename}/', name: 'downloadfileurl')]
-    public function downloadFile($filename, ManagerRegistry $doctrine){
+    public function downloadFile($filename, ManagerRegistry $doctrine)
+    {
 
         $product = $doctrine->getRepository(Upload::class)->findOneBy(
             ['files' => $filename]
         );
 
-        if($product->getFilePassword() != null){
-            if($_GET['password']){
-                if($_GET['password'] == $product->getFilePassword()){
+        if ($product->getFilePassword() != null) {
+            if ($_GET['password']) {
+                if ($_GET['password'] == $product->getFilePassword()) {
                     $product->setCountDownload($product->getCountDownload() + 1);
                     $doctrine->getManager()->flush();
                     $path = getcwd() . '/uploads/files/' . $filename;
@@ -58,13 +59,13 @@ class UploadCrudController extends AbstractCrudController
 
                     $response->setContent($content);
                     return $response;
-                }else{
+                } else {
                     return $this->redirectToRoute('download_file', array('id' => $product->getId()));
                 }
-            }else{
+            } else {
                 return $this->redirectToRoute('download_file', array('id' => $product->getId()));
             }
-        }else{
+        } else {
             $product->setCountDownload($product->getCountDownload() + 1);
             $doctrine->getManager()->flush();
             $path = getcwd() . '/uploads/files/' . $filename;
@@ -73,7 +74,7 @@ class UploadCrudController extends AbstractCrudController
             $response = new Response();
 
             $response->headers->set('Content-Type', 'mime/type');
-            $response->headers->set('Content-Disposition', 'attachment;filename=' .$filename);
+            $response->headers->set('Content-Disposition', 'attachment;filename=' . $filename);
 
             $response->setContent($content);
             return $response;
@@ -81,7 +82,8 @@ class UploadCrudController extends AbstractCrudController
     }
 
     #[Route('/download/{id}', name: 'download_file')]
-    public function renderDownlmoad($id , ManagerRegistry $doctrine){
+    public function renderDownlmoad($id, ManagerRegistry $doctrine)
+    {
         $entity = $doctrine->getRepository(Upload::class)->find($id);
         $filename = $entity;
         return $this->render(
@@ -94,7 +96,7 @@ class UploadCrudController extends AbstractCrudController
     {
         $upload = new Upload();
         $upload->setUser($this->getUser());
-        if (!in_array('ROLE_PRIME', $this->getUser()->getRoles()) && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+        if (!in_array('ROLE_PRIME', $this->getUser()->getRoles()) && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $this->getUser()->setCoins($this->getUser()->getCoins() - 1);
         }
         return $upload;
@@ -107,7 +109,7 @@ class UploadCrudController extends AbstractCrudController
             IntegerField::new('countDownload', 'Number of Download')->hideOnForm(),
             ImageField::new('files', 'File to upload')->setUploadDir('public/uploads/files')->setUploadedFileNamePattern('[slug]-[uuid].[extension]')->hideOnIndex()->hideWhenUpdating(),
             TextareaField::new('description', 'Description'),
-            TextField::new('filePassword', 'Password')->setFormType(PasswordType::class),
+            TextField::new('filePassword', 'Password')->setFormType(PasswordType::class)->setPermission('ROLE_ADMIN')->setPermission('ROLE_PRIME'),
             AssociationField::new('User', 'User')->setDisabled()->hideOnForm()->hideOnIndex(),
             AssociationField::new('User', 'User')->setDisabled()->hideOnForm()->setPermission('ROLE_ADMIN'),
         ];
@@ -133,22 +135,29 @@ class UploadCrudController extends AbstractCrudController
             });
     }
 
-    public function manageCoins(ManagerRegistry $doctrine, AdminUrlGenerator $adminUrlGenerator){
+    public function manageCoins(ManagerRegistry $doctrine, AdminUrlGenerator $adminUrlGenerator)
+    {
         $user = $this->getUser();
-        if($user->getCoins() == 0 && (!in_array('ROLE_PRIME', $this->getUser()->getRoles()) || !in_array('ROLE_ADMIN', $this->getUser()->getRoles()))) {
-            return $this->redirectToRoute('upload');
-        }else{
+        if (!in_array('ROLE_PRIME', $this->getUser()->getRoles()) && !in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            if ($user->getCoins() == 0) {
+                return $this->redirectToRoute('upload');
+            } else {
+                return $this->redirect($adminUrlGenerator->setAction(Action::NEW)->generateUrl());
+            }
+        } else {
             return $this->redirect($adminUrlGenerator->setAction(Action::NEW)->generateUrl());
         }
     }
 
-    public function getUrl(AdminContext  $context , ManagerRegistry $doctrine){
+    public function getUrl(AdminContext  $context, ManagerRegistry $doctrine)
+    {
         $product = $context->getRequest()->query->get('entityId');
         $entity = $doctrine->getRepository(Upload::class)->find($product);
-        return $this->redirectToRoute('download_file', array('id'=>$entity->getId()));
+        return $this->redirectToRoute('download_file', array('id' => $entity->getId()));
     }
 
-    public function deleteInfo(AdminContext $context , ManagerRegistry $doctrine){
+    public function deleteInfo(AdminContext $context, ManagerRegistry $doctrine)
+    {
         $product = $context->getRequest()->query->get('entityId');
         $entity = $doctrine->getRepository(Upload::class)->find($product);
         $filename = $entity->getFiles();
@@ -157,7 +166,7 @@ class UploadCrudController extends AbstractCrudController
         $em->remove($entity);
         $em->flush();
         $filesystem = new Filesystem();
-        $filesystem->remove( $filename);
+        $filesystem->remove($filename);
         return $this->redirectToRoute('upload');
     }
 
@@ -166,15 +175,13 @@ class UploadCrudController extends AbstractCrudController
     {
 
 
-        if(in_array('ROLE_ADMIN', $this->getUser()->getRoles())){
+        if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $response = $this->container->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
             return $response;
-        }else{
+        } else {
             $response = $this->container->get(EntityRepository::class)->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
             $response->andWhere('entity.User = :user')->setParameter('user', $this->getUser());
             return $response;
         }
-
     }
-
 }

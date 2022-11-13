@@ -13,14 +13,17 @@ class Accueil
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255)]
     private ?string $logo = null;
-
-    #[ORM\Column]
-    private ?int $totalFilesOnSite = null;
 
     #[ORM\Column(length: 255)]
     private ?string $textOnHome = null;
+
+    #[ORM\Column]
+    private ?bool $active = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
 
     public function getId(): ?int
     {
@@ -39,18 +42,6 @@ class Accueil
         return $this;
     }
 
-    public function getTotalFilesOnSite(): ?int
-    {
-        return $this->totalFilesOnSite;
-    }
-
-    public function setTotalFilesOnSite(int $totalFilesOnSite): self
-    {
-        $this->totalFilesOnSite = $totalFilesOnSite;
-
-        return $this;
-    }
-
     public function getTextOnHome(): ?string
     {
         return $this->textOnHome;
@@ -59,6 +50,30 @@ class Accueil
     public function setTextOnHome(string $textOnHome): self
     {
         $this->textOnHome = $textOnHome;
+
+        return $this;
+    }
+
+    public function isActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
 
         return $this;
     }

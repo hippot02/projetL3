@@ -4,7 +4,9 @@
 		<meta charset="UTF-8">
 
 		<nav class="navbar navbar-expand-sm navbar-light bg-lightgray">
-			<a class="navbar-brand" href="#">FileUp</a>
+
+			<a class="navbar-brand" href="app_home_page">FileUp</a>
+
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -14,7 +16,7 @@
 						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link " href="{{path('app_contact')}}">Contact</a>
 
-						{% elseif is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') and is_granted('ROLE_PRIME') %}
+					{% elseif is_granted('ROLE_ADMIN') and is_granted('ROLE_USER') and is_granted('ROLE_PRIME') %}
 						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
 						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
@@ -22,14 +24,14 @@
 						<a class="nav-item nav-link" href="{{path('admin')}}">Admin</a>
 						<a class="nav-item nav-link" href="{{path('app_logout')}}">Se Deconnecter</a>
 
-						{% elseif is_granted('ROLE_USER') or is_granted('ROLE_PRIME') %}
+					{% elseif is_granted('ROLE_USER') or is_granted('ROLE_PRIME') %}
 						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link" href="{{path('app_upload')}}">Upload</a>
 						<a class="nav-item nav-link" href="{{path('app_contact')}}">Contact</a>
 						<a class="nav-item nav-link" href="{{path('app_user')}}">Profil</a>
 						<a class="nav-item nav-link" href="{{path('app_logout')}}">Se Deconnecter</a>
 
-						{% else %}
+					{% else %}
 						<a class="nav-item nav-link " href="{{path('app_home_page')}}">Home</a>
 						<a class="nav-item nav-link" href="{{path('app_login')}}">Login</a>
 						<a class="nav-item nav-link" href="{{path('app_register')}}">Register</a>
@@ -50,4 +52,4 @@
 	<body>
 		{% block body %}{% endblock %}
 	</body>
-</html></head></html></head></html></head></html>
+</html></head></html></head></html></head></html></head></html>
